@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Akademik</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>APLIKASI CRUD AKADEMIK</h1>
+
+        <!-- FORM TAMBAH DATA -->
+        <div class="form-box">
+
+            <form action="/tambah" method="POST">
+
+                <input type="text"
+                name="nim"
+                placeholder="NIM"
+                required>
+
+                <input type="text"
+                name="nama"
+                placeholder="Nama"
+                required>
+
+                <input type="text"
+                name="jenis_kelamin"
+                placeholder="Jenis Kelamin"
+                required>
+
+                <input type="text"
+                name="jurusan"
+                placeholder="Jurusan"
+                required>
+
+                <input type="number"
+                name="semester"
+                placeholder="Semester"
+                required>
+
+                <input type="text"
+                name="alamat"
+                placeholder="Alamat"
+                required>
+
+                <button type="submit">
+                    Tambah Data
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- TABEL DATA -->
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>NIM</th>
+                    <th>Nama</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Jurusan</th>
+                    <th>Semester</th>
+                    <th>Alamat</th>
+                    <th>Aksi</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for mhs in data %}
+
+                <tr>
+
+                    <form action="/update/{{ mhs.nim }}"
+                    method="POST">
+
+                        <td>
+                            {{ mhs.nim }}
+                        </td>
+
+                        <td>
+                            <input type="text"
+                            name="nama"
+                            value="{{ mhs.nama }}">
+                        </td>
+
+                        <td>
+                            <input type="text"
+                            name="jenis_kelamin"
+                            value="{{ mhs.jenis_kelamin }}">
+                        </td>
+
+                        <td>
+                            <input type="text"
+                            name="jurusan"
+                            value="{{ mhs.jurusan }}">
+                        </td>
+
+                        <td>
+                            <input type="number"
+                            name="semester"
+                            value="{{ mhs.semester }}">
+                        </td>
+
+                        <td>
+                            <input type="text"
+                            name="alamat"
+                            value="{{ mhs.alamat }}">
+                        </td>
+
+                        <td>
+
+                            <button class="update-btn"
+                            type="submit">
+                                Update
+                            </button>
+
+                            <a class="hapus-btn"
+                            href="/hapus/{{ mhs.nim }}">
+                                Hapus
+                            </a>
+
+                        </td>
+
+                    </form>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</body>
+</html>
